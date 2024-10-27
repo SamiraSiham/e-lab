@@ -130,7 +130,7 @@
                     href="http://www.um5.ac.ma/um5/"
                     class="underline"
                 >
-                    Universite Mohamed 5 Rabat
+                    Universite Mohamed V Rabat
                 </a>
             </div>
             <div class="text-[#2A645D] flex flex-row pt-1 items-center">

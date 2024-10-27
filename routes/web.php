@@ -24,4 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/my-login', function(){
+    return Inertia::Render('Auth/LoginCopy');
+});
+
 require __DIR__.'/auth.php';

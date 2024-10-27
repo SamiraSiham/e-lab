@@ -1,38 +1,14 @@
 <script setup>
+import { Link } from '@inertiajs/vue3';
 import { ref, getCurrentInstance, onMounted } from "vue";
-
 let open = ref(false);
-let showButton = ref(true);
-const { proxy } = getCurrentInstance();
-onMounted(async () => {
-    console.log(localStorage.getItem("token"));
-    if (localStorage.getItem("token") != null) {
-        showButton = false;
-    }
-    console.log(showButton);
-});
-proxy.showButton = showButton;
+
 function MenuOpen() {
     open.value = !open.value;
 }
-function changeDirectory() {
-    window.location.href = "/login";
-}
-function changeDirectoryToDashboard() {
-    window.location.href = "/dashboard/salles";
-}
+
 </script>
-<script>
-import Logo from "../images/ens.png";
-import { ref } from "vue";
-export default {
-    data() {
-        return {
-            Logo: Logo,
-        };
-    },
-};
-</script>
+
 <template>
     <nav
         class="bg-[#E8E0D6] w-full md:flex md:items-center lg:items-center md:justify-between"
@@ -93,11 +69,9 @@ export default {
                 </li>
                 <div
                     class="p-2 pt-3 md:mx-10 flex flex-row justify-center"
-                    v-if="showButton"
                 >
-                    <button
-                        @click="changeDirectory()"
-                        id="navigation_button"
+                    <Link
+                        :href="route('login')"
                         class="bg-orange align-middle text-center rounded-full hover:bg-[#2A645D] p-2 text-white"
                     >
                         <span class="flex flex-row items-center"
@@ -117,37 +91,22 @@ export default {
                                 </svg>
                             </span>
                         </span>
-                    </button>
+                    </Link>
                 </div>
-                <div
-                    class="p-2 pt-3 md:mx-10 flex flex-row justify-center"
-                    v-else-if="!showButton"
-                >
-                    <button
-                        @click="changeDirectoryToDashboard()"
-                        id="navigation_button"
-                        class="bg-[#f4a46b] align-middle text-center rounded-full hover:bg-[#2A645D] p-2 text-white"
-                    >
-                        <span class="flex flex-row items-center"
-                            >Commencer
-                            <span class="px-1">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="white"
-                                    width="15"
-                                    height="15"
-                                    viewBox="0 0 20 20"
-                                    id="chevron"
-                                >
-                                    <path
-                                        d="M13.25 10 6.109 2.58a.697.697 0 0 1 0-.979.68.68 0 0 1 .969 0l7.83 7.908a.697.697 0 0 1 0 .979l-7.83 7.908a.68.68 0 0 1-.969 0 .697.697 0 0 1 0-.979L13.25 10z"
-                                    ></path>
-                                </svg>
-                            </span>
-                        </span>
-                    </button>
-                </div>
+                
             </ul>
         </div>
     </nav>
 </template>
+
+<script>
+import Logo from "../images/ens.png";
+import { ref } from "vue";
+export default {
+    data() {
+        return {
+            Logo: Logo,
+        };
+    },
+};
+</script>
