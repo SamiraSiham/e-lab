@@ -1,12 +1,12 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+// import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import Sidebar from '@/Components/Dashboard/Sidebar.vue';
+import Header from '@/Components/Dashboard/Header.vue';
 </script>
 
 <template>
-    <Head title="Dashboard" />
-
-    <AuthenticatedLayout>
+    <!-- <AuthenticatedLayout>
         <template #header>
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800 "
@@ -26,5 +26,11 @@ import { Head } from '@inertiajs/vue3';
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </AuthenticatedLayout> -->
+    <Head title="Dashboard" />
+    <Sidebar/>
+    <Header/>
+    <div class="bg-white mx-20 py-5 font-Aldrich">
+        <h1 class="md:text-3xl max-md:text-sm text-green font-medium">Bonjour {{ $page.props.auth.user.prenom }} {{ $page.props.auth.user.nom }}</h1>
+    </div>
 </template>

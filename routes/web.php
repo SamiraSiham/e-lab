@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\SalleController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EnseignerController;
 
 Route::get('/', function () {
     return Inertia::render('Landing', [
@@ -12,7 +15,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('/');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -24,8 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/my-login', function(){
-    return Inertia::Render('Auth/LoginCopy');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('modules', ModuleController::class);
+    Route::resource('salles', SalleController::class);
+    Route::resource('enseigner', EnseignerController::class);
 });
 
 require __DIR__.'/auth.php';

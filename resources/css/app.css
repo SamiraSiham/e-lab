@@ -1,3 +1,4 @@
+@import "@fortawesome/fontawesome-free/css/all.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,3 +9,12 @@
         src: url('/public/fonts/Aldrich-Regular.ttf') format("ttf");
     }
 }
+
+.sidebar_icons {
+    @apply relative flex items-center justify-center h-14 w-14 mt-2 mb-2 mx-auto shadow-lg rounded-full
+      hover:rounded-full p-2 hover:bg-[#dcb08c] active:bg-[#dcb08c] transition-all duration-300 ease-linear cursor-pointer;
+  }
+  .sidebar-tooltip {
+    @apply absolute w-auto p-2 m-2 min-w-max left-14 z-40 bg-light-orange text-white
+      rounded-md shadow-md text-xs font-bold transition-all duration-100 scale-0 origin-left;
+  }
