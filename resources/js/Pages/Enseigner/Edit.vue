@@ -9,12 +9,13 @@ const props = defineProps({
     salles: Object,
     modules: Object,
     user: Object,
-    ens : Object
+    ens: Object,
 });
 onMounted(() => {
     console.log(props.ens);
 });
 const form = useForm({
+    _method : "put",
     salle_id: props.ens.salle_id,
     module_id: props.ens.module_id,
     user_id: props.user.id,
@@ -22,10 +23,10 @@ const form = useForm({
     date_deroulement: props.ens.date_deroulement,
     heure_debut: props.ens.heure_debut,
     heure_fin: props.ens.heure_fin,
-    support: props.ens.Support,
+    support: null,
 });
 const submit = () => {
-    router.put("/enseigner", form, { forceFormData: true });
+    router.post(`/enseigner/${props.ens.id}`, form);
 };
 </script>
 <template>
@@ -74,7 +75,10 @@ const submit = () => {
                                     {{ i.nom_salle }}
                                 </option>
                             </select>
-                            <InputError class="mt-1" :message="form.errors.salle_id" />
+                            <InputError
+                                class="mt-1"
+                                :message="form.errors.salle_id"
+                            />
                         </div>
                         <!-- Module -->
                         <div>
@@ -99,7 +103,10 @@ const submit = () => {
                                     {{ i.nom_module }}
                                 </option>
                             </select>
-                            <InputError class="mt-1" :message="form.errors.module_id" />
+                            <InputError
+                                class="mt-1"
+                                :message="form.errors.module_id"
+                            />
                         </div>
                     </div>
                     <!-- Type -->
@@ -140,7 +147,10 @@ const submit = () => {
                                 v-model="form.date_deroulement"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-2.5"
                             />
-                            <InputError class="mt-1" :message="form.errors.date_deroulement" />
+                            <InputError
+                                class="mt-1"
+                                :message="form.errors.date_deroulement"
+                            />
                         </div>
                         <!-- time pickers -->
                         <div>
@@ -165,7 +175,10 @@ const submit = () => {
                                             required
                                         />
                                     </div>
-                                    <InputError class="mt-1" :message="form.errors.heure_debut" />
+                                    <InputError
+                                        class="mt-1"
+                                        :message="form.errors.heure_debut"
+                                    />
                                 </div>
                                 <div>
                                     <label
@@ -185,23 +198,28 @@ const submit = () => {
                                             v-model="form.heure_fin"
                                         />
                                     </div>
-                                    <InputError class="mt-1" :message="form.errors.heure_fin" />
+                                    <InputError
+                                        class="mt-1"
+                                        :message="form.errors.heure_fin"
+                                    />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Support -->
                     <div class="mb-6">
-                            <label
-                                class="mb-1 block text-md font-medium text-white"
-                                >Support (facultatif / moins de 100mb) </label
-                            >
-                            <input
-                                @input="form.support = $event.target.files[0]"
-                                type="file"
-                                class="block w-full text-md file:mr-4 file:rounded-md bg-white text-gray-900 rounded-lg file:border file:bg-blue hover:file:bg-white hover:file:border-blue hover:file:text-blue file:py-2.5 file:px-4 file:text-sm file:font-semibold file:text-white"
-                            />
-                            <InputError class="mt-1" :message="form.errors.support" />
+                        <label class="mb-1 block text-md font-medium text-white"
+                            >Support (facultatif / moins de 100mb)
+                        </label>
+                        <input
+                            @input="form.support = $event.target.files[0]"
+                            type="file"
+                            class="block w-full text-md file:mr-4 file:rounded-md bg-white text-gray-900 rounded-lg file:border file:bg-blue hover:file:bg-white hover:file:border-blue hover:file:text-blue file:py-2.5 file:px-4 file:text-sm file:font-semibold file:text-white"
+                        />
+                        <InputError
+                            class="mt-1"
+                            :message="form.errors.support"
+                        />
                     </div>
 
                     <!-- Buttons here (DO NOT TOUCH) -->

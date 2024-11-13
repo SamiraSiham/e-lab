@@ -31,6 +31,8 @@ import Header from '@/Components/Dashboard/Header.vue';
     <Sidebar/>
     <Header/>
     <div class="bg-white mx-20 py-5 font-Aldrich">
-        <h1 class="md:text-3xl max-md:text-sm text-green font-medium">Bonjour {{ $page.props.auth.user.prenom }} {{ $page.props.auth.user.nom }}</h1>
+        <h1 class="md:text-3xl max-md:text-sm text-green font-medium">
+            Bonjour {{ $page.props.auth.user.prenom }} {{ $page.props.auth.user.nom }}
+        </h1>
     </div>
 </template>

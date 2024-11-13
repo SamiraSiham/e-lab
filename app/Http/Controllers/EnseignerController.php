@@ -114,6 +114,7 @@ class EnseignerController extends Controller {
 
     public function update( Request $request, string $id ) {
         $ens = Enseigner::findOrFail($id);
+        // dd($request->all());
         try {
             $request->validate( [
                 'salle_id' => 'required',
@@ -123,7 +124,7 @@ class EnseignerController extends Controller {
                 'date_deroulement' => [ 'required', 'date' ],
                 'heure_debut' => 'required|date_format:H:i',
                 'heure_fin' => 'required|date_format:H:i|after:heure_debut',
-                'support' => 'nullable|file|max:102400', //100mb maximum size
+                'support' => 'nullable|file|max:102400', # 100mb maximum sizes
             ] );
             if ( $request->hasFile( 'support' ) ) {
                 $oldPath = $ens->Support;
