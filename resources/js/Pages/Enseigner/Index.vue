@@ -15,7 +15,7 @@ const deleteRecord = (id) => {
 }
 </script>
 <template>
-    <Head title="modules" />
+    <Head title="Enseignement" />
     <div class="flex flex-row gap-x-3 font-Aldrich">
         <Sidebar />
         <div class="flex flex-col w-full">

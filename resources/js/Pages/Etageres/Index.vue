@@ -10,12 +10,12 @@ onMounted(()=>{
     console.log(props.data);
 })
 const deleteRecord = (id) => {
-    router.delete(`/placards/${id}`);
+    router.delete(`/etageres/${id}`);
     // location.reload();
 }
 </script>
 <template>
-    <Head title="Placards" />
+    <Head title="Etageres" />
     <div class="flex flex-row gap-x-3 font-Aldrich">
         <Sidebar />
         <div class="flex flex-col w-full">
@@ -45,7 +45,7 @@ const deleteRecord = (id) => {
                         </div>
                         <div class="my-2">
                             <Link
-                                :href="route('placards.create')"
+                                :href="route('etageres.create')"
                                 class="bg-green text-white px-3 py-2 border border-green rounded-lg hover:text-green hover:bg-white"
                             >
                                 Ajouter <i class="fa-solid fa-plus"></i>
@@ -64,14 +64,14 @@ const deleteRecord = (id) => {
                                 >
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
-                                            Numero de placard
+                                            Numero d'etagere
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Nom de salle
+                                            Salle
                                         </th>
                                         
                                         <th scope="col" class="px-6 py-3">
-                                            Type
+                                            Placard
                                         </th>
                                         
                                         <th scope="col" class="px-6 py-3">
@@ -89,21 +89,21 @@ const deleteRecord = (id) => {
                                             scope="row"
                                             class="text-gray-600 px-6 py-4 font-medium whitespace-nowrap"
                                         >
-                                            {{ i.num_placard }}
+                                            {{ i.num_etagere }}
                                         </th>
                                         <td class="text-gray-600 px-6 py-4">
                                             {{ i.salle.nom_salle }}
                                         </td>
                                         
                                         <td class="text-gray-600 px-6 py-4">
-                                            {{ i.type }}
+                                            {{ i.placard.num_placard }}
                                         </td>
                                         
 
                                         <td class="px-6 py-4">
                                             <Link
                                                 :href="
-                                                    route('placards.edit', i.id)
+                                                    route('etageres.edit', i.id)
                                                 "
                                                 class="font-medium hover:underline text-blue"
                                                 >Edit</Link

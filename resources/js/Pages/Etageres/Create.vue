@@ -5,19 +5,35 @@ import Sidebar from "@/Components/Dashboard/Sidebar.vue";
 import InputError from "@/Components/InputError.vue";
 import { router } from "@inertiajs/vue3";
 import { onMounted } from "vue";
+import { ref } from "vue";
+import axios from "axios";
 const props = defineProps({
     salles: Object,
+    placards: Object,
 });
-onMounted(() => {
-    console.log(props);
-});
+let salles = ref(props.salles);
+let placards = ref(null);
+const getAvailablePlacards = () => {
+    axios
+        .get(`/placards/${form.salle_id}`)
+        .then((res) => {
+            placards.value = res.data.placard;
+            console.log(res.data.placard);
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+};
+// onMounted(() => {
+//     console.log(props);
+// });
 const form = useForm({
-    num_placard : null,
+    num_etagere: null,
     salle_id: null,
-    type: null,
+    placard_id: null,
 });
 const submit = () => {
-    router.post("/placards", form);
+    router.post("/etageres", form);
 };
 </script>
 <template>
@@ -36,7 +52,7 @@ const submit = () => {
                 class="bg-beige px-3 flex flex-col items-center rounded-lg pt-2 pb-3 ml-20 mt-2 justify-center"
             >
                 <h1 class="text-green text-2xl font-semibold">
-                    Ajouter un Placard
+                    Ajouter un Etagere
                 </h1>
                 <form
                     class="bg-orange p-5 text-white rounded-lg w-[85%] my-7"
@@ -54,19 +70,23 @@ const submit = () => {
                             <select
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-2.5"
                                 v-model="form.salle_id"
+                                @change="getAvailablePlacards(form.salle_id)"
                             >
                                 <option :selected="true" :value="null">
                                     Choisissez une salle
                                 </option>
                                 <option
-                                    v-for="i in props.salles"
+                                    v-for="i in salles"
                                     :key="i.id"
                                     :value="i.id"
                                 >
                                     {{ i.nom_salle }}
                                 </option>
                             </select>
-                            <InputError class="mt-1" :message="form.errors.salle_id" />
+                            <InputError
+                                class="mt-1"
+                                :message="form.errors.salle_id"
+                            />
                         </div>
                         <!-- Numero Placard -->
                         <div>
@@ -76,37 +96,47 @@ const submit = () => {
                                 >Numero de placard</label
                             >
 
-                            <input
-                                type="text"
-                                id="num_placard"
-                                v-model="form.num_placard"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5"
-                                required
+                            <select
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-2.5"
+                                v-model="form.placard_id"
+                            >
+                                <option :selected="true" :value="null">
+                                    Choisissez un placard
+                                </option>
+                                <option
+                                    v-for="i in placards"
+                                    :key="i.id"
+                                    :value="i.id"
+                                >
+                                    {{ i.num_placard }}
+                                </option>
+                            </select>
+                            <InputError
+                                class="mt-1"
+                                :message="form.errors.placard_id"
                             />
-                            <InputError class="mt-1" :message="form.errors.module_id" />
                         </div>
                     </div>
-                    <!-- Type -->
+                    <!-- Numero d'etagere -->
                     <div class="mb-6">
                         <label
                             for="email"
                             class="block mb-2 text-md font-medium text-white"
-                            >Type</label
+                            >Numero d'etagere</label
                         >
 
-                        <select
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-2.5"
-                            v-model="form.type"
-                        >
-                            <option :selected="true" :value="null">
-                                Choisissez un type
-                            </option>
-                            <option :value="`vertical`">vertical</option>
-                            <option :value="`horizontal`">horizontal</option>
-                        </select>
-                        <InputError class="mt-1" :message="form.errors.type" />
+                        <input
+                            type="text"
+                            id="num_etagere"
+                            v-model="form.num_etagere"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5"
+                            required
+                        />
+                        <InputError
+                            class="mt-1"
+                            :message="form.errors.num_etagere"
+                        />
                     </div>
-
 
                     <!-- Buttons here (DO NOT TOUCH) -->
                     <div class="flex md:gap-x-3 max-md:flex-col max-md:gap-y-2">
@@ -117,7 +147,7 @@ const submit = () => {
                             Ajouter
                         </button>
                         <Link
-                            :href="route('placards.index')"
+                            :href="route('etageres.index')"
                             class="text-white bg-blue hover:bg-white hover:text-blue border border-blue font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                         >
                             Annuler

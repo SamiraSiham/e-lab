@@ -31,11 +31,10 @@ class PlacardController extends Controller {
     */
 
     public function store( Request $request ) {
-        // dd($request->all());
         try {
             $request->validate( 
             [
-                'num_placard' => 'required|max:255|unique:placards',
+                'num_placard' => 'required|max:255',
                 'type' => 'required|max:255',
                 'salle_id' => 'required|max:255',
             ]);
@@ -44,7 +43,6 @@ class PlacardController extends Controller {
                 'type' => $request->type,
                 'salle_id' => $request->salle_id,
             ] );
-            // return response()->json( [ 'message'=>'salle ajouté avec succès' ] );
             return to_route('placards.index');
         }catch(ValidationException $e){
             return response()->json(['errors' => $e->errors()], 422);
@@ -52,12 +50,12 @@ class PlacardController extends Controller {
     }
 
     /**
-    * Display the specified resource.
+    * get placards by salle_id
     */
 
     public function show( string $id ) {
-        $placard = Placard::findOrFail($id);
-        return response()->json(['placard', $placard]);
+        $placards = Placard::where('salle_id', '=', $id)->get();
+        return response()->json(['placard' => $placards]);
     }
 
     /**
@@ -80,7 +78,7 @@ class PlacardController extends Controller {
         try {
             $request->validate( 
             [
-                'num_placard' => 'required|max:255|unique:placards',
+                'num_placard' => 'required|max:255',
                 'salle_id' => 'required|max:255',
                 'type' => 'required|max:255',
             ]);

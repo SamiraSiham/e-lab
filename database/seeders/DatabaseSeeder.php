@@ -9,6 +9,7 @@ use Database\Seeders\RoleSeeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\SalleSeeder;
 use Database\Seeders\ModuleSeeder;
+use Database\Seeders\EtagereSeeder;
 use Database\Seeders\PlacardSeeder;
 use Database\Seeders\EnseignerSeeder;
 
@@ -32,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SalleSeeder::class);
         $this->call(EnseignerSeeder::class);
         $this->call(PlacardSeeder::class);
+        $this->call(EtagereSeeder::class);
     }
 }
