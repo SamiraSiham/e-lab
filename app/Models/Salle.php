@@ -17,7 +17,7 @@ class Salle extends Model {
         return $this->hasMany( Enseigner::class, 'salle_id' );
     }
 
-    public function placard(): HasMany  {
-        return $this->hasMany( Placard::class, 'id_salle_plc' );
+    public function placards(): HasMany  {
+        return $this->hasMany( Placard::class, 'salle_id' );
     }
 }

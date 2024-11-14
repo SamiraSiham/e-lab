@@ -14,7 +14,7 @@ const menu = [
     { id: 2, name: "Modules", icon: moduleIcon, route: "modules.index" },
     { id: 3, name: "Salles", icon: salleIcon, route: "salles.index" },
     {id : 4, name : "Enseignement", icon : enseignerIcon, route : 'enseigner.index'},
-    // {id : 5, name : "Placards", icon : placardIcon, route : 'placards.index'},
+    {id : 5, name : "Placards", icon : placardIcon, route : 'placards.index'},
     // {id : 6, name : "Etageres", icon : etagereIcon, route : 'etageres.index'},
     // {id : 7, name : "Materiels", icon : materielIcon, route : 'materiels.index'},
     // {id : 8, name : "Profile", icon : userIcon, route : 'profile.index'},

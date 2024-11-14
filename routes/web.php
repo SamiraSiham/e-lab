@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\PlacardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EnseignerController;
 
@@ -32,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('modules', ModuleController::class);
     Route::resource('salles', SalleController::class);
     Route::resource('enseigner', EnseignerController::class);
+    Route::resource('placards', PlacardController::class);
 });
 
 require __DIR__.'/auth.php';
