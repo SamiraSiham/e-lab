@@ -11,9 +11,9 @@ const props = defineProps({
     user: Object,
     ens: Object,
 });
-onMounted(() => {
-    console.log(props.ens);
-});
+// onMounted(() => {
+//     console.log(props.ens);
+// });
 const form = useForm({
     _method : "put",
     salle_id: props.ens.salle_id,

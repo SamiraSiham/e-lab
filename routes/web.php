@@ -8,6 +8,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\EtagereController;
 use App\Http\Controllers\PlacardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MaterielController;
 use App\Http\Controllers\EnseignerController;
 
 Route::get('/', function () {
@@ -36,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('enseigner', EnseignerController::class);
     Route::resource('placards', PlacardController::class);
     Route::resource('etageres', EtagereController::class);
+    Route::resource('materiels', MaterielController::class);
 });
 
 require __DIR__.'/auth.php';

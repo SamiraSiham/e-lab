@@ -58,7 +58,7 @@ class EtagereController extends Controller
      */
     public function show(string $id)
     {
-        $etagere = Etagere::where('placard_id', '=', $id);
+        $etagere = Etagere::where('placard_id', '=', $id)->get();
         return response()->json(['etagere' => $etagere]);
     }
 
