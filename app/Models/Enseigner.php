@@ -11,6 +11,11 @@ class Enseigner extends Model {
     protected $table = 'enseigner';
     protected $primaryKey = 'id';
     protected $guarded = [];
+    // protected $casts = [
+    //     'date_deroulement' => 'date',
+    //     'heure_debut' => 'datetime',
+    //     'heure_fin' => 'datetime',
+    // ];
 
     public function modules() : BelongsTo {
         return $this->belongsTo( Module::class, 'module_id' );

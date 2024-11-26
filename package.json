@@ -19,6 +19,16 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.6.0",
-        "@inertiajs/vue3": "^1.2.0"
+        "@fullcalendar/core": "^6.1.15",
+        "@fullcalendar/daygrid": "^6.1.15",
+        "@fullcalendar/timegrid": "^6.1.15",
+        "@fullcalendar/vue3": "^6.1.15",
+        "@inertiajs/vue3": "^1.2.0",
+        "@popperjs/core": "^2.11.8",
+        "@schedule-x/theme-default": "^2.7.0",
+        "@schedule-x/vue": "^2.6.0",
+        "@syncfusion/ej2-vue-schedule": "^27.2.3",
+        "@vuepic/vue-datepicker": "^10.0.0",
+        "v-calendar": "^3.1.2"
     }
 }

@@ -1,6 +1,11 @@
 <?php
 
+use Carbon\Carbon;
+use App\Models\User;
 use Inertia\Inertia;
+use App\Models\Salle;
+use App\Models\Materiel;
+use App\Models\Enseigner;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\SalleController;
@@ -21,7 +26,30 @@ Route::get('/', function () {
 })->name('/');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $user_count = User::count();
+    $materiel_count = Materiel::count();
+    $salle_count = Salle::count();
+    $events = Enseigner::with('users')
+    ->with('salles')->with('modules')->get()->map(
+        function ($event){
+            return [
+                'id' => $event->id,
+                'professeur' => $event->users->nom,
+                'salle' => $event->salles->nom_salle,
+                'module' => $event->modules->nom_module,
+                'type' => $event->type_cours,
+                'date' => $event->date_deroulement,
+                // 'start' => $event->heure_debut,
+                // 'end' => $event->heure_fin
+                'start' => $event->date_deroulement .' '. Carbon::parse($event->heure_debut)->format('H:i'),
+                'end' =>$event->date_deroulement .' '. Carbon::parse($event->heure_fin)->format('H:i'),
+                'title' => $event->type_cours,
+                // 'start' => $event->date_deroublement . 'T' . $event->heure_debut,
+                // 'end' => $event->date_deroublement . 'T' . $event->heure_fin,
+            ];
+        }
+    );
+    return Inertia::render('Dashboard', compact('user_count', 'materiel_count', 'salle_count', 'events'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
