@@ -20,10 +20,10 @@ class AdminSeeder extends Seeder {
         User::create( [
             'nom' => 'Siham',
             'prenom' => 'Samira',
-            'email' => 'samirasiham@gmail.com',
+            'email' => 'samirasiham.admin@gmail.com',
             'email_verified_at' => now(),
-            'password' => 'samsiham1234',
+            'password' => 'samsihamadmin1234',
             'remember_token' => Str::random( 10 ),
-        ] )->assignRole('admin', 'professor', 'technician' , 'student');
+        ] )->assignRole('admin');
     }
 }

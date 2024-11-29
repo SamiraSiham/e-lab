@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Models\Module;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Salle extends Model {
-    use HasFactory;
+    use HasFactory, HasRoles;
     protected $table = 'salles';
     protected $primaryKey = 'id';
     protected $guarded = [];

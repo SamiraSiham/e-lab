@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class ProfessorSeeder extends Seeder
+class TechnicianSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,10 +20,10 @@ class ProfessorSeeder extends Seeder
         User::create( [
             'nom' => 'Siham',
             'prenom' => 'Samira',
-            'email' => 'samirasiham.professor@gmail.com',
+            'email' => 'samirasiham.technician@gmail.com',
             'email_verified_at' => now(),
-            'password' => 'samsihamprofessor1234',
+            'password' => 'samsihamtechnician1234',
             'remember_token' => Str::random( 10 ),
-        ] )->assignRole('professor');
+        ] )->assignRole('technician');
     }
 }

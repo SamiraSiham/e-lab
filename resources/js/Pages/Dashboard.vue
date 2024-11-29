@@ -1,6 +1,6 @@
 <script setup>
 // import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import Sidebar from "@/Components/Dashboard/Sidebar.vue";
 import Header from "@/Components/Dashboard/Header.vue";
 import Schedule from "@/Components/Dashboard/Schedule.vue";
@@ -10,6 +10,7 @@ const props = defineProps({
     materiel_count: Number,
     salle_count: Number,
     events: Array,
+    roles : Array,
 });
 onMounted(() => {
     console.log(props);
@@ -22,9 +23,14 @@ onMounted(() => {
     <Header />
     <div class="bg-white mx-20 py-5 font-Aldrich">
         <h1 class="md:text-3xl max-md:text-sm text-green font-medium">
-            Bonjour {{ $page.props.auth.user.prenom }}
-            {{ $page.props.auth.user.nom }}
+            Bonjour {{ $page.props.auth.user.prenom }} {{ $page.props.auth.user.nom }}
         </h1>
+        <!-- <h2 class="md:text-2xl max-md:text-sm text-blue font-medium">
+            Roles :
+            <span v-for="(index, key) in props.roles" :key="key">
+                {{ index }}
+            </span>
+        </h2> -->
         <div class="w-full flex justify-around py-3">
             <!-- utilisateurs -->
             <div>
@@ -76,8 +82,8 @@ onMounted(() => {
             </div>
             <!-- materiel -->
             <div>
-                <a
-                    href="#"
+                <Link
+                    :href="route('materiels.index')"
                     class="flex flex-col items-center bg-beige border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100"
                 >
                     <svg
@@ -116,12 +122,12 @@ onMounted(() => {
                             {{ props.materiel_count }}
                         </p>
                     </div>
-                </a>
+                </Link>
             </div>
             <!-- salles -->
             <div>
-                <a
-                    href="#"
+                <Link
+                    :href="route('salles.index')"
                     class="flex flex-col items-center bg-beige border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100"
                 >
                     <svg
@@ -203,7 +209,7 @@ onMounted(() => {
                             {{ props.salle_count }}
                         </p>
                     </div>
-                </a>
+                </Link>
             </div>
         </div>
             <!-- schedule -->

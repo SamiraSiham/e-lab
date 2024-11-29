@@ -11,7 +11,10 @@ use Database\Seeders\SalleSeeder;
 use Database\Seeders\ModuleSeeder;
 use Database\Seeders\EtagereSeeder;
 use Database\Seeders\PlacardSeeder;
+use Database\Seeders\StudentSeeder;
 use Database\Seeders\EnseignerSeeder;
+use Database\Seeders\ProfessorSeeder;
+use Database\Seeders\TechnicianSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,6 +32,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);
+        $this->call(StudentSeeder::class);
+        $this->call(ProfessorSeeder::class);
+        $this->call(TechnicianSeeder::class);
         $this->call(ModuleSeeder::class);
         $this->call(SalleSeeder::class);
         $this->call(EnseignerSeeder::class);

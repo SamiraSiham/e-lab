@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Models\Salle;
 use App\Models\Placard;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Etagere extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
     protected $table = "etageres";
     protected $primaryKey = "id";
     protected $guarded = [];

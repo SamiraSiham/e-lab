@@ -8,6 +8,9 @@ use App\Models\Materiel;
 use App\Models\Enseigner;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\EtagereController;
@@ -15,6 +18,7 @@ use App\Http\Controllers\PlacardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MaterielController;
 use App\Http\Controllers\EnseignerController;
+use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
     return Inertia::render('Landing', [
@@ -26,6 +30,7 @@ Route::get('/', function () {
 })->name('/');
 
 Route::get('/dashboard', function () {
+    $roles = auth()->user()->getRoleNames();
     $user_count = User::count();
     $materiel_count = Materiel::count();
     $salle_count = Salle::count();
@@ -39,17 +44,13 @@ Route::get('/dashboard', function () {
                 'module' => $event->modules->nom_module,
                 'type' => $event->type_cours,
                 'date' => $event->date_deroulement,
-                // 'start' => $event->heure_debut,
-                // 'end' => $event->heure_fin
                 'start' => $event->date_deroulement .' '. Carbon::parse($event->heure_debut)->format('H:i'),
                 'end' =>$event->date_deroulement .' '. Carbon::parse($event->heure_fin)->format('H:i'),
-                'title' => $event->type_cours,
-                // 'start' => $event->date_deroublement . 'T' . $event->heure_debut,
-                // 'end' => $event->date_deroublement . 'T' . $event->heure_fin,
+                'title' => $event->type_cours . $event->salles->nom_salle,
             ];
         }
     );
-    return Inertia::render('Dashboard', compact('user_count', 'materiel_count', 'salle_count', 'events'));
+    return Inertia::render('Dashboard', compact('user_count', 'materiel_count', 'salle_count', 'events', 'roles'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -58,6 +59,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('admin', AdminController::class)->middleware(['auth', 'role:admin']);
+Route::resource('users', UserController::class)->middleware(['auth', 'role:admin']);
+Route::resource('roles', RoleController::class)->middleware(['auth', 'role:admin']);
+Route::resource('permissions', PermissionController::class)->middleware(['auth', 'role:admin']);
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('modules', ModuleController::class);

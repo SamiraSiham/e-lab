@@ -5,6 +5,8 @@ import { Link } from "@inertiajs/vue3";
     <div id="header_container" class="h-11 bg-orange flex justify-end">
         <Link
             :href="route('logout')"
+            method="post"
+            as="button"
             class="text-[#FF0000] max-md:text-sm flex flex-row items-center gap-x-2 px-5"
         >
             Deconnexion

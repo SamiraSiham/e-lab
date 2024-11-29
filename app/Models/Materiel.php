@@ -5,13 +5,14 @@ namespace App\Models;
 use App\Models\Salle;
 use App\Models\Etagere;
 use App\Models\Placard;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Materiel extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
     protected $table = "materiels";
     protected $primaryKey = "id";
     protected $guarded = [];

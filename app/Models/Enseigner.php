@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Enseigner extends Model {
-    use HasFactory;
+    use HasFactory, HasRoles;
     protected $table = 'enseigner';
     protected $primaryKey = 'id';
     protected $guarded = [];
