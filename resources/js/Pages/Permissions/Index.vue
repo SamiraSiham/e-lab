@@ -46,63 +46,63 @@ const props = defineProps({
                             </Link>
                         </div>
                     </div>
-                    <div class="w-11/12 md:w-full">
-                        <div
-                            class="relative overflow-x-auto shadow-md sm:rounded-lg"
-                        >
-                            <table
-                                class="w-full text-sm text-left rtl:text-right text-gray-500"
+                        <div class="w-11/12 md:w-full">
+                            <div
+                                class="relative overflow-x-auto shadow-md sm:rounded-lg"
                             >
-                                <thead
-                                    class="text-xs text-white uppercase bg-green"
+                                <table
+                                    class="w-full text-sm text-left rtl:text-right text-gray-500"
                                 >
-                                    <tr>
-                                        <th scope="col" class="px-4 py-3">
-                                            Permission
-                                        </th>
-                                        <th scope="col" class="px-4 py-3">
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        class="bg-white border-b"
-                                        v-for="i in props.permissions"
-                                        :key="i.id"
+                                    <thead
+                                        class="text-xs text-white uppercase bg-green"
                                     >
-                                        <th
-                                            scope="row"
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap"
+                                        <tr>
+                                            <th scope="col" class="px-4 py-3">
+                                                Permission
+                                            </th>
+                                            <th scope="col" class="px-4 py-3">
+                                                Actions
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            class="bg-white border-b"
+                                            v-for="i in props.permissions"
+                                            :key="i.id"
                                         >
-                                            {{ i.name }}
-                                        </th>
-                                        
-                                        <td
-                                            class="py-3 px-4"
-                                        >
-                                            <Link
-                                                class="text-blue"
-                                                :href="
-                                                    route('permissions.edit', i.id)
-                                                "
-                                                >Edit</Link
+                                            <th
+                                                scope="row"
+                                                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap"
                                             >
-                                            <Link
-                                                class="text-red-600 ps-4"
-                                                :href="
-                                                    route('permissions.destroy', i.id)
-                                                "
-                                                method="delete"
-                                                as="button"
-                                                >Delete</Link
+                                                {{ i.name }}
+                                            </th>
+
+                                            <td
+                                                class="py-3 px-4"
                                             >
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                                <Link
+                                                    class="text-blue"
+                                                    :href="
+                                                        route('permissions.edit', i.id)
+                                                    "
+                                                    >Edit</Link
+                                                >
+                                                <Link
+                                                    class="text-red-600 ps-4"
+                                                    :href="
+                                                        route('permissions.destroy', i.id)
+                                                    "
+                                                    method="delete"
+                                                    as="button"
+                                                    >Delete</Link
+                                                >
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

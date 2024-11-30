@@ -84,7 +84,7 @@ const props = defineProps({
                                             <span
                                                 v-for="j in i.permissions"
                                                 :key="j.id"
-                                                >{{ j.name }}</span
+                                                >{{ j.name }} <br/></span
                                             >
                                         </td>
                                         <td class="py-3 px-4">

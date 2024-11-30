@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Resources\RoleResource;
 use App\Http\Requests\CreateRoleRequest;
+use Spatie\Permission\Models\Permission;
+use App\Http\Resources\PermissionResource;
 
 class RoleController extends Controller {
     /**
@@ -23,7 +25,9 @@ class RoleController extends Controller {
     */
 
     public function create() {
-        return Inertia::render( 'Roles/Create' );
+        return Inertia::render( 'Roles/Create', [
+            'permissions' => PermissionResource::collection( Permission::all() )
+        ] );
     }
 
     /**
@@ -31,7 +35,10 @@ class RoleController extends Controller {
     */
 
     public function store( CreateRoleRequest $request ) {
-        Role::create( [ 'name' => $request->name ] );
+        $role = Role::create( [ 'name' => $request->name ] );
+        if($request->has('permissions')){
+            $role->syncPermissions($request->input('permissions.*.name'));
+        }
         return to_route( 'roles.index' );
         // dd( $request->name );
     }
@@ -51,7 +58,8 @@ class RoleController extends Controller {
     public function edit( string $id ) {
         $role = Role::findOrFail( $id );
         return Inertia::render( 'Roles/Edit', [
-            'role' => new RoleResource( $role )
+            'role' => new RoleResource( $role ),
+            'permissions' => PermissionResource::collection( Permission::all() )
         ] );
     }
 
@@ -61,7 +69,10 @@ class RoleController extends Controller {
 
     public function update( CreateRoleRequest $request, string $id ) {
         $role = Role::findOrFail( $id );
-        $role->update( $request->validated() );
+        $role->update( [
+            'name' => $request->name,
+        ] );
+        $role->syncPermissions( $request->input( 'permissions.*.name' ) );
         return to_route( 'roles.index' );
     }
 

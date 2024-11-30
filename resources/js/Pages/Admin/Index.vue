@@ -14,9 +14,9 @@ const props = defineProps({
     roles: Array,
     userList: Object,
 });
-onMounted(() => {
-    console.log(props);
-});
+// onMounted(() => {
+//     console.log(props);
+// });
 </script>
 
 <template>

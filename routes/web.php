@@ -19,6 +19,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MaterielController;
 use App\Http\Controllers\EnseignerController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RevokePermissionController;
 
 Route::get('/', function () {
     return Inertia::render('Landing', [
@@ -59,10 +60,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('admin', AdminController::class)->middleware(['auth', 'role:admin']);
-Route::resource('users', UserController::class)->middleware(['auth', 'role:admin']);
-Route::resource('roles', RoleController::class)->middleware(['auth', 'role:admin']);
-Route::resource('permissions', PermissionController::class)->middleware(['auth', 'role:admin']);
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('admin', AdminController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
+    Route::delete('/roles/{role}/permissions/{permission}', RevokePermissionController::class)->name('roles.permissions.destroy');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('modules', ModuleController::class);

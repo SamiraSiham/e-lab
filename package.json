@@ -29,6 +29,7 @@
         "@schedule-x/vue": "^2.6.0",
         "@syncfusion/ej2-vue-schedule": "^27.2.3",
         "@vuepic/vue-datepicker": "^10.0.0",
-        "v-calendar": "^3.1.2"
+        "v-calendar": "^3.1.2",
+        "vue-multiselect": "^3.0.0-beta.3"
     }
 }

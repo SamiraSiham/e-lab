@@ -2,14 +2,17 @@
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import Header from "@/Components/Dashboard/Header.vue";
 import Sidebar from "@/Components/Dashboard/Sidebar.vue";
-import { defineProps } from "vue";
 import InputError from "@/Components/InputError.vue";
-defineProps({ errors: Object });
+import Multiselect from "vue-multiselect";
+const props = defineProps({
+    permissions: Array,
+});
 const form = useForm({
-    name : null
+    name: null,
+    permissions: [],
 });
 const submit = () => {
-    form.post(route('roles.store'));
+    form.post(route("roles.store"));
 };
 </script>
 <template>
@@ -37,7 +40,7 @@ const submit = () => {
                     <div
                         class="flex flex-row max-md:flex-col items-center justify-center"
                     >
-                        <div class="my-6 w-1/2 max-md:w-full">
+                        <div class="my-6 w-full">
                             <label
                                 for="name"
                                 class="block mb-2 text-lg font-medium text-white"
@@ -50,10 +53,34 @@ const submit = () => {
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5"
                                 required
                             />
-                            <InputError class="mt-2" :message="form.errors.name" />
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.name"
+                            />
                         </div>
                     </div>
-                    <div class="flex md:gap-x-4 max-md:flex-col max-md:gap-y-2 justify-center">
+                    <!-- permissions multiselect -->
+                    <div class="mb-6">
+                            <label
+                                class="block mb-2 text-lg font-medium text-white typo__label"
+                                >Permissions</label
+                            >
+                            <multiselect
+                                v-model="form.permissions"
+                                :options="permissions"
+                                :multiple="true"
+                                :close-on-select="false"
+                                :clear-on-select="false"
+                                placeholder="Pick some"
+                                label="name"
+                                track-by="id"
+                                :preselect-first="false"
+                            >
+                            </multiselect>
+                        </div>
+                    <div
+                        class="flex md:gap-x-4 max-md:flex-col max-md:gap-y-2 justify-center"
+                    >
                         <button
                             type="submit"
                             class="text-white bg-green hover:bg-white hover:text-green border border-green font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
@@ -72,3 +99,4 @@ const submit = () => {
         </div>
     </div>
 </template>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

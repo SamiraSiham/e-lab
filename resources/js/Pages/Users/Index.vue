@@ -5,9 +5,6 @@ import Sidebar from "@/Components/Dashboard/Sidebar.vue";
 const props = defineProps({
     users: Object,
 });
-const deleteSalle = (id) => {
-    router.delete(`/users/${id}`);
-};
 </script>
 <template>
     <Head title="Users" />
@@ -115,6 +112,8 @@ const deleteSalle = (id) => {
                                                 :href="
                                                     route('users.destroy', i.id)
                                                 "
+                                                method="delete"
+                                                as="button"
                                                 >Delete</Link
                                             >
                                         </td>
